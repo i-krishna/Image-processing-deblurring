@@ -1,0 +1,95 @@
+Software for ForWaRD: 	Fourier Wavelet Regularized Deconvolution
+Software author: 	Ramesh Neelamani
+Modification Date: 	June 5, 2002
+Comments: 		neelsh@rice.edu
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+How to run the program for image deblurring?
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Step 0: Since you are reading this file, you have succesfully
+completed Step 0.
+
+Step 1 (Optional): Open the file ExptSetup.m
+
+Step 2 (Optional): Edit the file to set the self-explanatory
+parameters in the file to test with different images (eg. lena, boats,
+cameraman etc), blurs, noise levels etc and save it.
+
+Step 3: Run the ExptSetup file
+
+IMPORTANT NOTE: In case of encountered errors check below for a possible fix.
+---------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Related contents in the directory are listed below.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ExptSetup.m : Chooses the inputs needed to set the deconvolution experiment
+
+ForWaRDSetup.m : Sets up the experiment using the chosen parameter in ExptSetup
+
+RegParamSearch.m : Empirically searches the regularization parameter (recommended)
+
+RunForWaRD.m : Runs the WaRD algorithm on the setup experiment
+
+DispResults.m : Displays the results
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Related functions used in image deblurring
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Functions such as discrete wavelet transforms (mdwt.m and midwt.m) and
+redundant wavelet transforms (mrdwt.m and mirdwt.m) from the Rice
+Wavelet toolbox are used in this implementation of the ForWaRD algorithm.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Image deblurring Notes: 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+1) The package is designed to run on Sun Solaris, Linux, or Windows
+environment. I have tried to include precompiled mex files for many
+common operating systems, but the list is not complete. If you have
+any other platform, then you would need to download the Rice Wavelet
+tool box, compile the C files for your platform, and then run the
+programs. This could be particularly true if you are using new Windows
+releases or new Linux releases.  Also see
+http://www.dsp.rice.edu/software/ for more details on the Rice wavelet
+toolbox.
+
+
+If ERROR == "Warning: One or more output arguments not assigned during call to 'mrdwt'.", 
+
+  SOLUTION: Compile the C files in the routines directory for your system.
+
+	1) Change the matlab working directory to "routines" 
+	2) Type "compile" at the matlab command prompt. This will
+	   compile the C files for your operating system. Ofcourse,
+	   you will need a C compiler to get this running.
+
+
+2) If the regularization parameter is pre-set, the program takes less
+than a minute for 256x256 images on a 300MHz, 128 MB, Pentium 3
+machine with Linux running on it. To search the regularization
+parameter, it takes an additional 2 minutes.
+
+3) Currently, the software is suited to run square images only. The
+program uses around 30MB of space for 256x256 images. Decreasing the
+number of decomposition levels would help reduce the memory required.
+
+4) The current package differs from the previously released package in
+the type of Fourier shrinkage employed. This package relies on
+Tikhonov regularization in the Fourier domain, while the previous
+package used a parametrized Wiener filter.	
+
+
+
+
+
+
+
+
+
+
+
